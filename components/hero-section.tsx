@@ -86,7 +86,6 @@ export function HeroSection() {
             showElements.name ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-16 scale-75"
           }`}
         >
-          Hi, I'm{" "}
           <span className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent animate-pulse">
             Ankit Mukherjee
           </span>
