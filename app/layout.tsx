@@ -4,6 +4,9 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { CustomCursor } from "@/components/custom-cursor"
+import { GrainOverlay } from "@/components/grain-overlay"
+import { LenisProvider } from "@/components/lenis-provider"
 import { Suspense } from "react"
 import "./globals.css"
 
@@ -22,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarnings>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
+        <LenisProvider />
         <Suspense fallback={null}>
           <ThemeProvider
             attribute="class"
@@ -33,6 +37,8 @@ export default function RootLayout({
             {children}
           </ThemeProvider>
         </Suspense>
+        <GrainOverlay />
+        <CustomCursor />
         <Analytics />
       </body>
     </html>
