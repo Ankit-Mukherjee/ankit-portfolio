@@ -28,105 +28,112 @@ export function Navigation() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border/50" : "bg-transparent"
+        isScrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="font-bold text-xl text-foreground">Ankit Mukherjee</div>
+        <div className="flex justify-between items-center h-20">
+          <div className="font-light text-xl text-foreground tracking-wide">Ankit Mukherjee</div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-12">
             <button
               onClick={() => scrollToSection("about")}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
             >
-              About
+              <span className="relative z-10">About</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
             </button>
             <button
               onClick={() => scrollToSection("experience")}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
             >
-              Experience
+              <span className="relative z-10">Experience</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
             </button>
             <button
               onClick={() => scrollToSection("projects")}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
             >
-              Projects
+              <span className="relative z-10">Projects</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
             </button>
             <button
               onClick={() => scrollToSection("skills")}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
             >
-              Skills
+              <span className="relative z-10">Skills</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
             </button>
             <button
               onClick={() => scrollToSection("recommendations")}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
             >
-              Recommendations
+              <span className="relative z-10">Recommendations</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
             >
-              Contact
+              <span className="relative z-10">Contact</span>
+              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
             </button>
+            <div className="w-px h-6 bg-border mx-4"></div>
             <ThemeToggle />
           </div>
 
           {/* Mobile Navigation */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center space-x-4">
             <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="h-9 w-9"
+              className="h-10 w-10"
             >
-              {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border/50">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               <button
                 onClick={() => scrollToSection("about")}
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 w-full text-left"
+                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
               >
                 About
               </button>
               <button
                 onClick={() => scrollToSection("experience")}
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 w-full text-left"
+                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
               >
                 Experience
               </button>
               <button
                 onClick={() => scrollToSection("projects")}
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 w-full text-left"
+                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
               >
                 Projects
               </button>
               <button
                 onClick={() => scrollToSection("skills")}
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 w-full text-left"
+                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
               >
                 Skills
               </button>
               <button
                 onClick={() => scrollToSection("recommendations")}
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 w-full text-left"
+                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
               >
                 Recommendations
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
-                className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 w-full text-left"
+                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
               >
                 Contact
               </button>

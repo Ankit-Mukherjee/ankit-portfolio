@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Quote, Star } from "lucide-react"
+import { Quote, Star, ArrowDown } from "lucide-react"
 
 const recommendations = [
   {
@@ -74,96 +74,102 @@ export function RecommendationsSection() {
   }, [])
 
   return (
-    <section id="recommendations" ref={sectionRef} className="py-20 bg-gradient-to-br from-background via-background to-primary/5">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="recommendations" ref={sectionRef} className="py-24 bg-muted/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
-              What People Say
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Recommendations from colleagues and mentors who have worked closely with me
-            </p>
-            <div className="flex justify-center mt-6">
-              <div className="flex space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+          {/* Modern header with side layout */}
+          <div className="grid lg:grid-cols-3 gap-12 mb-20">
+            <div className="lg:col-span-1">
+              <h2 className="text-4xl sm:text-5xl font-light text-foreground mb-6 leading-tight">
+                What People
+                <span className="block font-medium">Say</span>
+              </h2>
+              <p className="text-muted-foreground font-light leading-relaxed">
+                Recommendations from colleagues and mentors who have worked closely with me on various projects.
+              </p>
+            </div>
+            
+            <div className="lg:col-span-2">
+              <div className="space-y-8">
+                {recommendations.map((recommendation, index) => (
+                  <div
+                    key={recommendation.id}
+                    className={`group transition-all duration-700 ${
+                      visibleCards.includes(index)
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-10"
+                    }`}
+                    style={{ transitionDelay: `${index * 200}ms` }}
+                  >
+                    <div className="flex gap-6 p-6 bg-background border border-border hover:border-foreground/30 transition-all duration-500 hover:shadow-lg">
+                      {/* Avatar */}
+                      <div className="flex-shrink-0">
+                        <Avatar className="h-16 w-16 border border-border">
+                          <AvatarImage 
+                            src={recommendation.avatar}
+                            alt={recommendation.name}
+                          />
+                          <AvatarFallback className="bg-muted text-foreground font-medium">
+                            {recommendation.initials}
+                          </AvatarFallback>
+                        </Avatar>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 space-y-4">
+                        <div>
+                          <h3 className="font-medium text-foreground text-lg">
+                            {recommendation.name}
+                          </h3>
+                          <p className="text-sm text-muted-foreground mb-2">
+                            {recommendation.title}
+                          </p>
+                          <Badge variant="secondary" className="text-xs bg-muted text-muted-foreground border-none">
+                            {recommendation.relationship}
+                          </Badge>
+                        </div>
+                        
+                        <blockquote className="text-foreground leading-relaxed font-light italic">
+                          "{recommendation.text}"
+                        </blockquote>
+                        
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">{recommendation.date}</span>
+                          <a
+                            href={recommendation.linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-foreground hover:text-muted-foreground transition-colors font-medium group-hover:underline"
+                          >
+                            View on LinkedIn →
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {recommendations.map((recommendation, index) => (
-              <Card
-                key={recommendation.id}
-                className={`bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-700 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 ${
-                  visibleCards.includes(index)
-                    ? "opacity-100 translate-y-0 scale-100"
-                    : "opacity-0 translate-y-8 scale-95"
-                }`}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4 mb-4">
-                    <Avatar className="h-12 w-12 ring-2 ring-primary/20">
-                      <AvatarImage 
-                        src={recommendation.avatar}
-                        alt={recommendation.name}
-                      />
-                      <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                        {recommendation.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-foreground text-sm">
-                        {recommendation.name}
-                      </h3>
-                      <p className="text-xs text-muted-foreground mb-1">
-                        {recommendation.title}
-                      </p>
-                      <Badge variant="secondary" className="text-xs">
-                        {recommendation.relationship}
-                      </Badge>
-                    </div>
-                    <Quote className="h-5 w-5 text-primary/60 flex-shrink-0" />
-                  </div>
-
-                  <blockquote className="text-sm text-muted-foreground leading-relaxed mb-4 italic">
-                    "{recommendation.text}"
-                  </blockquote>
-
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
-                    <span>{recommendation.date}</span>
-                    <a
-                      href={recommendation.linkedinUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-primary/80 transition-colors font-medium"
-                    >
-                      View on LinkedIn
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground">
-              Want to see more recommendations?{" "}
-              <a
-                href="https://www.linkedin.com/in/ankit281"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 transition-colors font-medium"
-              >
-                Visit my LinkedIn profile
-              </a>
+          {/* Bottom CTA */}
+          <div className="text-center pt-8 border-t border-border">
+            <p className="text-muted-foreground font-light mb-4">
+              Want to see more recommendations?
             </p>
+            <a
+              href="https://www.linkedin.com/in/ankit281"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors font-medium group"
+            >
+              Visit my LinkedIn profile
+              <ArrowDown className="h-4 w-4 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
         </div>
       </div>

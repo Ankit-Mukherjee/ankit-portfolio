@@ -41,111 +41,131 @@ export function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="py-20 pt-24 bg-gradient-to-br from-background via-muted/20 to-primary/5 relative overflow-hidden"
+      className="py-24 bg-background"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 animate-pulse" />
-      <div
-        className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"
-        style={{ animationDelay: "2s" }}
-      />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <h2
-          className={`text-4xl sm:text-5xl font-black text-center mb-16 text-foreground transition-all duration-1500 ease-out transform ${
-            showElements.title ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-16 scale-75"
-          }`}
-        >
-          About <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Me</span>
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <p
-              className={`text-lg text-muted-foreground text-pretty transition-all duration-1500 ease-out transform ${
-                showElements.text1 ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-full"
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Modern split layout */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+          {/* Left side - About content */}
+          <div className="lg:col-span-7 space-y-12">
+            <div
+              className={`transition-all duration-1000 ease-out transform ${
+                showElements.title ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              I'm a passionate <span className="text-primary font-semibold">Cloud Consultant & Software Engineer</span>{" "}
-              with over 3 years of experience building scalable cloud applications and AI-powered solutions. Currently
-              pursuing my Master's in Computer Science at University at Buffalo, I specialize in full-stack development
-              with a focus on AWS cloud services and modern web technologies.
-            </p>
+              <h2 className="text-4xl sm:text-5xl font-light text-foreground leading-tight">
+                About
+                <span className="block font-medium">Me</span>
+              </h2>
+            </div>
 
-            <p
-              className={`text-lg text-muted-foreground text-pretty transition-all duration-1500 ease-out transform ${
-                showElements.text2 ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
-              }`}
-            >
-              At PwC, I led <span className="text-primary font-semibold">$12M+ client wins</span> through innovative
-              cloud solutions and technical leadership. I developed end-to-end cloud applications for U.S. clients,
-              including conversational AI chatbots and automation tools. I'm passionate about creating efficient,
-              scalable solutions that solve real-world problems.
-            </p>
+            <div className="space-y-8">
+              <div
+                className={`transition-all duration-1000 ease-out transform ${
+                  showElements.text1 ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                }`}
+              >
+                <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                  I'm a passionate <span className="text-foreground font-medium">Cloud Consultant & Software Engineer</span>{" "}
+                  with over 3 years of experience building scalable cloud applications and AI-powered solutions. Currently
+                  pursuing my Master's in Computer Science at University at Buffalo, I specialize in full-stack development
+                  with a focus on AWS cloud services and modern web technologies.
+                </p>
+              </div>
+
+              <div
+                className={`transition-all duration-1000 ease-out transform ${
+                  showElements.text2 ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                }`}
+              >
+                <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                  At PwC, I led <span className="text-foreground font-medium">$12M+ client wins</span> through innovative
+                  cloud solutions and technical leadership. I developed end-to-end cloud applications for U.S. clients,
+                  including conversational AI chatbots and automation tools. I'm passionate about creating efficient,
+                  scalable solutions that solve real-world problems.
+                </p>
+              </div>
+            </div>
 
             <div
-              className={`flex flex-wrap gap-3 transition-all duration-1500 ease-out transform ${
-                showElements.badges ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-90"
+              className={`transition-all duration-1000 ease-out transform ${
+                showElements.badges ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
-              {[
-                "Full-Stack Development",
-                "Cloud Architecture",
-                "AI/ML Integration",
-                "DevOps",
-                "Technical Leadership",
-              ].map((badge, index) => (
-                <Badge
-                  key={badge}
-                  variant="secondary"
-                  className="transition-all duration-500 ease-out hover:scale-110 hover:bg-primary hover:text-primary-foreground font-semibold"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    transform: showElements.badges ? "translateY(0)" : "translateY(20px)",
-                  }}
-                >
-                  {badge}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <Card
-            className={`bg-card/80 backdrop-blur-sm border-border/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-1500 ease-out hover:scale-105 hover:-rotate-1 transform ${
-              showElements.card
-                ? "opacity-100 translate-x-0 rotate-0 scale-100"
-                : "opacity-0 translate-x-20 rotate-6 scale-90"
-            }`}
-          >
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-6 text-foreground">Education</h3>
-              <div className="space-y-6">
+              <h3 className="text-xl font-medium text-foreground mb-6">Core Expertise</h3>
+              <div className="grid grid-cols-2 gap-4">
                 {[
-                  {
-                    degree: "MS in Computer Science",
-                    school: "University at Buffalo, SUNY",
-                    period: "Aug 2024 – Dec 2025",
-                  },
-                  {
-                    degree: "Bachelor's in Information Technology",
-                    school: "Institute of Engineering and Management",
-                    period: "Aug 2017 – July 2021",
-                  },
-                ].map((edu, index) => (
+                  "Full-Stack Development",
+                  "Cloud Architecture",
+                  "AI/ML Integration",
+                  "DevOps",
+                  "Technical Leadership",
+                  "AWS Solutions",
+                ].map((skill, index) => (
                   <div
-                    key={index}
-                    className={`transition-all duration-1000 ease-out transform ${
-                      showElements.card ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                    }`}
-                    style={{ transitionDelay: `${800 + index * 200}ms` }}
+                    key={skill}
+                    className="p-4 bg-muted/30 border border-border hover:border-foreground/30 transition-all duration-300 group"
+                    style={{
+                      animationDelay: `${index * 100}ms`,
+                    }}
                   >
-                    <h4 className="font-semibold text-foreground text-lg">{edu.degree}</h4>
-                    <p className="text-muted-foreground font-medium">{edu.school}</p>
-                    <p className="text-sm text-primary">{edu.period}</p>
+                    <span className="text-foreground font-medium group-hover:text-muted-foreground transition-colors">
+                      {skill}
+                    </span>
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
+
+          {/* Right side - Education & Stats */}
+          <div className="lg:col-span-5 space-y-8">
+            <div
+              className={`transition-all duration-1000 ease-out transform ${
+                showElements.card ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+              }`}
+            >
+              <div className="bg-muted/20 border border-border p-8">
+                <h3 className="text-2xl font-light text-foreground mb-8">Education</h3>
+                <div className="space-y-8">
+                  {[
+                    {
+                      degree: "MS in Computer Science",
+                      school: "University at Buffalo, SUNY",
+                      period: "Aug 2024 – Dec 2025",
+                    },
+                    {
+                      degree: "Bachelor's in Information Technology",
+                      school: "Institute of Engineering and Management",
+                      period: "Aug 2017 – July 2021",
+                    },
+                  ].map((edu, index) => (
+                    <div
+                      key={index}
+                      className="border-l-2 border-foreground pl-6"
+                      style={{ transitionDelay: `${800 + index * 200}ms` }}
+                    >
+                      <h4 className="font-medium text-foreground text-lg mb-1">{edu.degree}</h4>
+                      <p className="text-muted-foreground font-light mb-1">{edu.school}</p>
+                      <p className="text-sm text-foreground font-medium">{edu.period}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Stats section */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="text-center p-6 bg-muted/20 border border-border">
+                <div className="text-3xl font-light text-foreground mb-2">3+</div>
+                <div className="text-sm text-muted-foreground font-light">Years Experience</div>
+              </div>
+              <div className="text-center p-6 bg-muted/20 border border-border">
+                <div className="text-3xl font-light text-foreground mb-2">$12M+</div>
+                <div className="text-sm text-muted-foreground font-light">Client Wins</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
