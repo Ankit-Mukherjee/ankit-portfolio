@@ -63,7 +63,7 @@ export function HeroSection() {
             ></div>
             <div className="relative">
               <Image
-                src="/images/1.jpg"
+                src="/images/ankit.png"
                 alt="Ankit Mukherjee"
                 width={280}
                 height={280}

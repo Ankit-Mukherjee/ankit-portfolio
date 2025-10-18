@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin } from "lucide-react"
 
 declare global {
   interface Window {
@@ -126,12 +126,6 @@ export function ContactSection() {
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     ank26.m@gmail.com
-                  </a>
-                </div>
-                <div className="flex items-center">
-                  <Phone className="h-5 w-5 text-primary mr-3" />
-                  <a href="tel:+17167091597" className="text-muted-foreground hover:text-primary transition-colors">
-                    +1 (716) 709-1597
                   </a>
                 </div>
                 <div className="flex items-center">
