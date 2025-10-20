@@ -97,7 +97,7 @@ export function HeroSection() {
                 onClick={() => scrollToSection("contact")}
                 variant="outline"
                 size="lg"
-                className="px-8 py-4 rounded-none transition-all duration-300 text-base font-medium border-foreground text-foreground hover:bg-foreground hover:text-background w-full sm:w-auto hover:scale-105 animate-float"
+                className="px-8 py-4 rounded-none transition-all duration-300 text-base font-medium border-2 border-black dark:border-white text-black dark:text-white bg-white dark:bg-black hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black w-full sm:w-auto hover:scale-105 animate-float"
               >
                 Contact Me
               </Button>
