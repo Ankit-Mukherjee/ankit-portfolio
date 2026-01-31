@@ -66,10 +66,11 @@ export function AboutSection() {
                 }`}
               >
                 <p className="text-lg text-muted-foreground leading-relaxed font-light">
-                  I'm a passionate <span className="text-foreground font-medium">Cloud Consultant & Software Engineer</span>{" "}
-                  with over 3 years of experience building scalable cloud applications and AI-powered solutions. Currently
-                  pursuing my Master's in Computer Science at University at Buffalo, I specialize in full-stack development
-                  with a focus on AWS cloud services and modern web technologies.
+                  I'm a <span className="text-foreground font-medium">Full-Stack Software Engineer</span>{" "}
+                  with 3+ years of experience specializing in building scalable web applications. Currently working at{" "}
+                  <span className="text-foreground font-medium">AskTuring.AI</span>, a fast-paced AI startup, where I lead features, 
+                  do system design, come up with execution plans, and build them end-to-end. I specialize in FastAPI, Agentic RAG, and 
+                  REST API development using Python, creating scalable AI-powered systems that deliver real value.
                 </p>
               </div>
 
@@ -79,10 +80,10 @@ export function AboutSection() {
                 }`}
               >
                 <p className="text-lg text-muted-foreground leading-relaxed font-light">
-                  At PwC, I led <span className="text-foreground font-medium">$12M+ client wins</span> through innovative
-                  cloud solutions and technical leadership. I developed end-to-end cloud applications for U.S. clients,
-                  including conversational AI chatbots and automation tools. I'm passionate about creating efficient,
-                  scalable solutions that solve real-world problems.
+                  Previously at PwC, I developed scalable NestJS APIs for quota enforcement and built intuitive capacity management 
+                  interfaces using React (TypeScript), achieving 90% unit test coverage. I deployed containerized services on AWS ECS 
+                  and utilized SQS to decouple services, buffering 300% traffic spikes. I'm passionate about bridging the gap between 
+                  complex infrastructure and intuitive user experiences.
                 </p>
               </div>
             </div>
@@ -96,11 +97,11 @@ export function AboutSection() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   "Full-Stack Development",
+                  "Agentic AI Workflows",
                   "Cloud Architecture",
-                  "AI/ML Integration",
-                  "DevOps",
-                  "Technical Leadership",
-                  "AWS Solutions",
+                  "Microservices",
+                  "System Reliability",
+                  "Vector Search & RAG",
                 ].map((skill, index) => (
                   <div
                     key={skill}
@@ -130,14 +131,15 @@ export function AboutSection() {
                 <div className="space-y-8">
                   {[
                     {
-                      degree: "MS in Computer Science",
+                      degree: "MS in Computer Science (Focus: AI/ML)",
                       school: "University at Buffalo, SUNY",
-                      period: "Aug 2024 – Dec 2025",
+                      period: "Dec 2025",
+                      gpa: "GPA: 3.73",
                     },
                     {
-                      degree: "Bachelor's in Information Technology",
+                      degree: "BS in Information Science",
                       school: "Institute of Engineering and Management",
-                      period: "Aug 2017 – July 2021",
+                      period: "July 2021",
                     },
                   ].map((edu, index) => (
                     <div
@@ -148,6 +150,7 @@ export function AboutSection() {
                       <h4 className="font-medium text-foreground text-lg mb-1">{edu.degree}</h4>
                       <p className="text-muted-foreground font-light mb-1">{edu.school}</p>
                       <p className="text-sm text-foreground font-medium">{edu.period}</p>
+                      {edu.gpa && <p className="text-sm text-muted-foreground font-light">{edu.gpa}</p>}
                     </div>
                   ))}
                 </div>
@@ -161,8 +164,8 @@ export function AboutSection() {
                 <div className="text-sm text-muted-foreground font-light">Years Experience</div>
               </div>
               <div className="text-center p-6 bg-muted/20 border border-border">
-                <div className="text-3xl font-light text-foreground mb-2">$12M+</div>
-                <div className="text-sm text-muted-foreground font-light">Client Wins</div>
+                <div className="text-3xl font-light text-foreground mb-2">90%</div>
+                <div className="text-sm text-muted-foreground font-light">Test Coverage</div>
               </div>
             </div>
           </div>

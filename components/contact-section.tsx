@@ -130,7 +130,7 @@ export function ContactSection() {
                 </div>
                 <div className="flex items-center">
                   <MapPin className="h-5 w-5 text-primary mr-3" />
-                  <span className="text-muted-foreground">New York</span>
+                  <span className="text-muted-foreground">San Jose, CA</span>
                 </div>
               </div>
 

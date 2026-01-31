@@ -24,7 +24,7 @@ export function FooterSection() {
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-white dark:text-black">Ankit Mukherjee</h3>
             <p className="text-sm text-gray-300 dark:text-gray-700">
-              Cloud Consultant & Full-Stack Engineer specializing in AWS solutions and AI/ML.
+              Full-Stack Software Engineer specializing in Agentic AI workflows, React (TypeScript), and Node.js.
             </p>
           </div>
 

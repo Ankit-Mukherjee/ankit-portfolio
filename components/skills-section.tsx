@@ -27,66 +27,61 @@ export function SkillsSection() {
 
   const skillCategories = [
     {
-      title: "Consulting & Leadership",
+      title: "Frontend",
       skills: [
-        "Client Consulting",
-        "Stakeholder Management",
-        "Technical Leadership",
-        "Business Analysis",
-        "Solution Architecture",
-        "Executive Presentations",
+        "React",
+        "TypeScript",
+        "Jest",
+        "React Testing Library",
+        "HTML5",
+        "CSS3",
+        "Data Visualization",
+      ],
+    },
+    {
+      title: "Backend",
+      skills: [
+        "Python",
+        "FastAPI",
+        "NestJS",
+        "Node.js",
+        "Java",
+        "RESTful APIs",
+        "Microservices",
+        "SQL",
+        "NoSQL",
+      ],
+    },
+    {
+      title: "Infrastructure",
+      skills: [
+        "AWS ECS",
+        "Docker",
+        "SQS",
+        "CloudWatch",
+        "Kubernetes",
+        "Capacity Management",
+      ],
+    },
+    {
+      title: "AI & Tools",
+      skills: [
+        "Agentic RAG",
+        "Langfuse",
+        "Weaviate",
+        "RAG",
+        "Git",
+        "CI/CD",
         "Agile/Scrum",
+        "Unit Testing",
       ],
-    },
-    {
-      title: "Cloud & Big Data",
-      skills: [
-        "AWS EC2",
-        "AWS Lambda",
-        "AWS S3",
-        "AWS API Gateway",
-        "AWS DynamoDB",
-        "AWS CloudFormation",
-        "AWS Bedrock",
-        "AWS Lex",
-        "AWS Connect",
-        "AWS SageMaker",
-        "Hadoop",
-        "Spark",
-      ],
-    },
-    {
-      title: "Programming Languages",
-      skills: ["Python", "JavaScript", "TypeScript", "Java", "C", "C++", "SQL", "HTML", "CSS"],
-    },
-    {
-      title: "Full-Stack Frameworks",
-      skills: ["React", "Next.js", "NestJS", "Express.js", "Flask", "FastAPI", "REST APIs", "WebSockets"],
-    },
-    {
-      title: "DevOps & CI/CD",
-      skills: ["Docker", "Kubernetes", "Jenkins", "GitHub Actions", "Automated Testing", "Monitoring"],
-    },
-    {
-      title: "ML/AI",
-      skills: [
-        "PyTorch",
-        "Scikit-learn",
-        "OpenAI API",
-        "Hugging Face",
-        "AWS SageMaker",
-        "AWS Bedrock",
-        "LLMs",
-        "Vector Search",
-      ],
-    },
-    {
-      title: "Databases",
-      skills: ["PostgreSQL", "MySQL", "Redshift", "Synapse", "Snowflake", "Teradata", "DynamoDB", "MongoDB"],
     },
     {
       title: "Certifications",
-      skills: ["Azure Fundamentals (AZ-900)", "Azure Data Fundamentals (DP-900)", "Snowflake Hands-on Essentials"],
+      skills: [
+        "Microsoft Certified: Azure Fundamentals (AZ-900)",
+        "Azure Data Fundamentals (DP-900)",
+      ],
     },
   ]
 

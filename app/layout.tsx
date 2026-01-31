@@ -8,9 +8,9 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Ankit Mukherjee - Software Engineer & Cloud Developer",
+  title: "Ankit Mukherjee - Full-Stack Software Engineer",
   description:
-    "Portfolio of Ankit Mukherjee - Full-stack developer specializing in cloud applications, AI solutions, and modern web technologies.",
+    "Full-Stack Software Engineer (3+ YOE) specializing in building scalable web applications with React (TypeScript) and Node.js. Expertise in Agentic AI workflows and cloud resource management systems. Currently at AskTuring.AI.",
   generator: "v0.app",
 }
 

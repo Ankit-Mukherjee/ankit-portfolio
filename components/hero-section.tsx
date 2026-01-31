@@ -70,13 +70,21 @@ export function HeroSection() {
             >
               <div className="space-y-4">
                 <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
-                  Cloud Consultant & Full-Stack Engineer
+                  Full-Stack Software Engineer
                 </p>
                 <p className="text-base text-foreground font-medium">
-                  AWS Solutions Architect | AI/ML Specialist
+                  Building Agentic AI Workflows @{" "}
+                  <a
+                    href="https://askturing.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline transition-all duration-300"
+                  >
+                    AskTuring.AI
+                  </a>
                 </p>
                 <p className="text-sm text-muted-foreground font-light max-w-md">
-                  Delivered $12M+ client wins through innovative cloud solutions and technical leadership
+                  Specializing in FastAPI, Agentic RAG, and REST API development. Building scalable AI-powered systems with Python in a fast-paced startup environment.
                 </p>
               </div>
             </div>

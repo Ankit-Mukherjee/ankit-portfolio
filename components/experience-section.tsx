@@ -39,44 +39,48 @@ export function ExperienceSection() {
   const experiences = [
     {
       title: "Software Engineer",
-      company: "Filmic, New York",
-      period: "Jan 2025 – May 2025",
-      location: "New York",
+      company: "AskTuring.AI",
+      period: "Jan 2026 – Present",
+      location: "San Jose, CA",
       description: [
-        "Built a full-stack film archival & discussion platform with NestJS, React, PostgreSQL",
-        "Implemented WebSocket-powered real-time chat and role-based access control",
-        "Designed and deployed Dockerized microservices on AWS with modular scaling, enabling fault-tolerant architecture",
-        "Led end-to-end development: schema design, API dev, CI/CD, deployment",
+        "Lead feature development in a fast-paced startup environment: design system architecture, create execution plans, and deliver end-to-end solutions",
+        "Built a Slack DM/mention connector for an agentic RAG system using Python and FastAPI, enabling users to query against recent channel history and attached files",
+        "Designed and implemented file ingestion + vector search pipeline (chunking, embeddings, Weaviate) to improve retrieval quality for unstructured content",
+        "Developed REST APIs with FastAPI for agentic RAG workflows, implementing async processing for low-latency responses and reliable delivery",
+        "Integrated Langfuse tracing to monitor LLM/agent performance, debug retrieval issues, and optimize token usage",
       ],
-      skills: ["NestJS", "React", "PostgreSQL", "WebSocket", "Docker", "AWS", "CI/CD"],
+      skills: ["Python", "FastAPI", "Agentic RAG", "REST APIs", "Weaviate", "Langfuse", "Slack API", "Vector Search", "System Design"],
       achievements: [],
+      website: "https://askturing.ai",
     },
     {
-      title: "Cloud Consultant",
-      company: "PwC, India",
+      title: "Software Engineer",
+      company: "PwC",
       period: "July 2021 – July 2024",
       location: "India",
       description: [
-        "Led end-to-end delivery and architecture of AWS based AI-powered customer engagement solutions for U.S. clients",
-        "Client-facing consultant: conducted weekly stakeholder sessions, authored Statements of Work (SoWs), design documentation",
-        "Developed automation accelerators and CI/CD pipelines to automate testing and deployment, improving time-to-market",
-        "Managed PwC Labs' internal product development (Report Rationalization Tool), leading sprints, assigning tasks in Jira",
-        "Built cloud migration accelerators (Teradata→Snowflake/Redshift/Synapse), delivering one-click automation",
-        "Regularly presented technical solutions and pitch decks to directors and partners, contributing to funding approvals",
+        "Frontend (React/TS): Built intuitive capacity management interfaces using React (TypeScript), achieving 90% unit test coverage via Jest and React Testing Library",
+        "Backend (NestJS): Developed scalable NestJS (Node.js) APIs for quota enforcement, optimizing latency for high-concurrency internal engineering workloads",
+        "Infrastructure (AWS): Deployed containerized services on AWS ECS and utilized SQS to decouple services, buffering 300% traffic spikes",
+        "Reliability (DRI): Served as DRI, utilizing CloudWatch to monitor resource allocation and system health, reducing Mean Time to Resolution (MTTR) by 40%",
+        "Database Tuning: Optimized PostgreSQL schemas using denormalization and indexing to power real-time data visualization dashboards for stakeholders",
       ],
       skills: [
-        "AWS",
-        "Client Consulting",
-        "Stakeholder Management",
-        "Technical Leadership",
-        "Agile/Scrum",
-        "Business Analysis",
-        "Solution Architecture",
+        "React",
+        "TypeScript",
+        "NestJS",
+        "Node.js",
+        "AWS ECS",
+        "SQS",
+        "PostgreSQL",
+        "Jest",
+        "CloudWatch",
+        "Unit Testing",
       ],
       achievements: [
-        { icon: DollarSign, text: "Enabled $12M contract win by outperforming competitor POCs" },
-        { icon: Award, text: "90% reduction in redundant reporting effort through internal product development" },
-        { icon: Award, text: "98% reduction in manual query conversion effort through automation accelerators" },
+        { icon: Award, text: "Achieved 90% unit test coverage via Jest and React Testing Library" },
+        { icon: Award, text: "Reduced MTTR by 40% through proactive monitoring and system health management" },
+        { icon: Award, text: "Buffered 300% traffic spikes using SQS to decouple services" },
       ],
     },
   ]
@@ -125,7 +129,18 @@ export function ExperienceSection() {
                 </div>
                 <div className="flex items-center text-muted-foreground">
                   <MapPin className="h-4 w-4 mr-1" />
-                  <span className="font-semibold text-primary">{exp.company}</span>
+                  {exp.website ? (
+                    <a
+                      href={exp.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-primary hover:underline"
+                    >
+                      {exp.company}
+                    </a>
+                  ) : (
+                    <span className="font-semibold text-primary">{exp.company}</span>
+                  )}
                   <span className="mx-2">•</span>
                   <span>{exp.location}</span>
                 </div>
