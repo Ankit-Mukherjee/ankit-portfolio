@@ -42,6 +42,7 @@ export function ExperienceSection() {
       company: "AskTuring.AI",
       period: "Jan 2026 – Present",
       location: "San Jose, CA",
+      logo: "https://www.google.com/s2/favicons?domain=askturing.ai&sz=128",
       description: [
         "Lead feature development in a fast-paced startup environment: design system architecture, create execution plans, and deliver end-to-end solutions",
         "Built a Slack DM/mention connector for an agentic RAG system using Python and FastAPI, enabling users to query against recent channel history and attached files",
@@ -58,6 +59,7 @@ export function ExperienceSection() {
       company: "PwC",
       period: "July 2021 – July 2024",
       location: "India",
+      logo: "https://www.google.com/s2/favicons?domain=pwc.com&sz=128",
       description: [
         "Frontend (React/TS): Built intuitive capacity management interfaces using React (TypeScript), achieving 90% unit test coverage via Jest and React Testing Library",
         "Backend (NestJS): Developed scalable NestJS (Node.js) APIs for quota enforcement, optimizing latency for high-concurrency internal engineering workloads",
@@ -120,29 +122,56 @@ export function ExperienceSection() {
               }`}
             >
               <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <CardTitle className="text-2xl text-foreground font-bold">{exp.title}</CardTitle>
-                  <div className="flex items-center text-muted-foreground text-sm font-medium">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    {exp.period}
-                  </div>
-                </div>
-                <div className="flex items-center text-muted-foreground">
-                  <MapPin className="h-4 w-4 mr-1" />
-                  {exp.website ? (
-                    <a
-                      href={exp.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-primary hover:underline"
-                    >
-                      {exp.company}
-                    </a>
-                  ) : (
-                    <span className="font-semibold text-primary">{exp.company}</span>
+                <div className="flex items-start gap-4 mb-4">
+                  {exp.logo && (
+                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-muted/30 rounded-lg border-2 border-border p-2">
+                      <img
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          // If logo fails, show company initial as fallback
+                          const initial = exp.company.charAt(0).toUpperCase();
+                          e.currentTarget.style.display = 'none';
+                          const parent = e.currentTarget.parentElement;
+                          if (parent && !parent.querySelector('.logo-fallback')) {
+                            const fallback = document.createElement('div');
+                            fallback.className = 'logo-fallback w-full h-full flex items-center justify-center bg-primary/10 rounded text-primary font-bold text-xl';
+                            fallback.textContent = initial;
+                            parent.appendChild(fallback);
+                          }
+                        }}
+                      />
+                    </div>
                   )}
-                  <span className="mx-2">•</span>
-                  <span>{exp.location}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <CardTitle className="text-2xl text-foreground font-bold">{exp.title}</CardTitle>
+                      <div className="flex items-center text-muted-foreground text-sm font-medium">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        {exp.period}
+                      </div>
+                    </div>
+                    <div className="flex items-center text-muted-foreground mt-2">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      {exp.website ? (
+                        <a
+                          href={exp.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-primary hover:underline"
+                        >
+                          {exp.company}
+                        </a>
+                      ) : (
+                        <span className="font-semibold text-primary">{exp.company}</span>
+                      )}
+                      <span className="mx-2">•</span>
+                      <span>{exp.location}</span>
+                    </div>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
