@@ -80,6 +80,102 @@ export function ProjectsSection() {
       icon: Target,
       category: "Computer Vision",
     },
+    {
+      title: "Cloud Migration Accelerator",
+      description:
+        "Enterprise-grade automation tool for seamless database migrations (Teradata → Snowflake/Redshift/Synapse). Reduced manual conversion effort by 98% and enabled one-click deployments.",
+      highlights: [
+        "Built intelligent SQL parser with regex-based query transformation",
+        "Automated schema mapping and data type conversion across platforms",
+        "Integrated CI/CD pipelines for automated testing and deployment",
+        "Delivered $2M+ cost savings through migration automation",
+      ],
+      skills: ["Python", "Flask", "React", "AWS", "Snowflake", "Teradata", "CI/CD"],
+      icon: Cloud,
+      category: "Enterprise Solution",
+    },
+    {
+      title: "AI-Powered Customer Engagement Platform",
+      description:
+        "Conversational AI system with multi-channel support (voice + chat) using AWS Bedrock and Anthropic Claude. Achieved <200ms response latency for thousands of daily interactions.",
+      highlights: [
+        "Integrated AWS Lex, Connect, and Bedrock for seamless voice/chat experience",
+        "Implemented vector-based knowledge retrieval for contextual responses",
+        "Built scalable microservices architecture with NestJS and DynamoDB",
+        "Designed real-time analytics dashboard for conversation insights",
+      ],
+      skills: ["AWS Bedrock", "NestJS", "DynamoDB", "AI/ML", "Microservices", "Real-time Analytics"],
+      icon: Brain,
+      category: "AI Solution",
+    },
+    {
+      title: "Comparative Analysis: VGG-16 vs ResNet-18",
+      description:
+        "Deep learning research project comparing CNN architectures for multi-class image classification. Achieved 90.6% accuracy with ResNet-18 while analyzing gradient flow patterns.",
+      highlights: [
+        "Built VGG-16 (92M params) and ResNet-18 (12M params) from scratch in PyTorch",
+        "ResNet skip connections showed 10x higher early-layer L2 norms",
+        "Reduced test error by 12% using mixup and label smoothing techniques",
+        "Achieved 3.2x faster convergence with SGD & RMSprop vs Adam optimizer",
+      ],
+      skills: ["PyTorch", "Deep Learning", "Computer Vision", "Python", "Research"],
+      github: "https://github.com/Ankit-Mukherjee/VGG-vs-Resnet",
+      icon: Code,
+      category: "Research Project",
+    },
+    {
+      title: "FitFuel - AI Diet App",
+      description:
+        "Intelligent nutrition application providing personalized meal plans through fine-tuned language models and interactive data visualizations.",
+      highlights: [
+        "Fine-tuned DistilGPT-2 on structured nutrition data for meal recommendations",
+        "Built responsive Next.js frontend with D3.js visualizations",
+        "Containerized full-stack app using Docker with NGINX reverse proxy",
+        "Deployed on DigitalOcean with automated CI/CD pipeline",
+      ],
+      skills: ["Next.js", "FastAPI", "Docker", "AI/ML", "DigitalOcean", "NGINX", "D3.js"],
+      github: "https://github.com/Ankit-Mukherjee/dietChartGenerator-",
+      demo: "http://104.248.229.28/",
+      icon: Database,
+      category: "Full-Stack App",
+    },
+    {
+      title: "Distributed Performance Analysis",
+      description:
+        "Comprehensive distributed computing project using Apache Spark and multiprocessing to solve computationally intensive tasks with performance comparisons across traditional and distributed methods.",
+      highlights: [
+        "Implemented Apache Spark solutions for edit distance computation, MLP inference, and flock simulation",
+        "Built multiprocessing alternatives for performance comparison against traditional for-loop methods",
+        "Developed Multi-Layer Perceptron inference using both non-Spark and Apache Spark implementations",
+        "Created bird flock movement simulation with distributed computing optimization using Apache Spark",
+      ],
+      skills: [
+        "Apache Spark",
+        "Python",
+        "Distributed Systems",
+        "Multiprocessing",
+        "Performance Analysis",
+        "Machine Learning",
+      ],
+      github: "https://github.com/Ankit-Mukherjee/distributed-performance-analysis",
+      icon: BarChart3,
+      category: "Systems Project",
+    },
+    {
+      title: "Handwritten Digit Classification",
+      description:
+        "Machine learning project implementing Logistic Regression and SVM classifiers for MNIST digit recognition with comprehensive performance analysis.",
+      highlights: [
+        "Implemented one-vs-all logistic regression and multi-class classification",
+        "Built SVM classifiers with linear and RBF kernels for comparison",
+        "Achieved high accuracy through hyperparameter tuning and optimization",
+        "Conducted extensive performance analysis with visualization of results",
+      ],
+      skills: ["Python", "Scikit-learn", "Machine Learning", "SVM", "Logistic Regression", "MNIST"],
+      github: "https://github.com/Ankit-Mukherjee/digit-classification-logreg-svm",
+      icon: Target,
+      category: "ML Project",
+    },
   ]
 
   return (
