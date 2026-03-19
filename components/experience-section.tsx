@@ -1,222 +1,267 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin, Award, DollarSign } from "lucide-react"
+import { useRef, useEffect, useState } from "react"
+import { motion, useScroll, useTransform, useInView, animate } from "framer-motion"
+import { ExternalLink } from "lucide-react"
+
+const experiences = [
+  {
+    company: "ASKTURING.AI",
+    role: "Software Engineer",
+    period: "Jan 2026 - Present",
+    location: "San Jose, CA",
+    website: "https://askturing.ai",
+    bullets: [
+      "Lead feature development in a fast-paced startup: system architecture, execution plans, and end-to-end delivery",
+      "Built Slack DM/mention connector for agentic RAG using Python and FastAPI, enabling queries against channel history and files",
+      "Designed file ingestion + vector search pipeline (chunking, embeddings, Weaviate) for improved retrieval quality",
+      "Developed REST APIs with FastAPI for agentic RAG workflows with async processing for low-latency responses",
+      "Integrated Langfuse tracing to monitor LLM/agent performance, debug retrieval, and optimize token usage",
+    ],
+    skills: [
+      "Python",
+      "FastAPI",
+      "Agentic RAG",
+      "REST APIs",
+      "Weaviate",
+      "Langfuse",
+      "Slack API",
+      "Vector Search",
+      "System Design",
+    ],
+  },
+  {
+    company: "PWC",
+    role: "Software Engineer",
+    period: "July 2021 - July 2024",
+    location: "India",
+    bullets: [
+      "Built capacity management interfaces using React (TypeScript), achieving 90% test coverage via Jest and React Testing Library",
+      "Developed scalable NestJS APIs for quota enforcement, optimizing latency for high-concurrency workloads",
+      "Deployed containerized services on AWS ECS, used SQS to decouple services buffering 300% traffic spikes",
+      "Served as DRI, using CloudWatch monitoring to reduce Mean Time to Resolution (MTTR) by 40%",
+      "Optimized PostgreSQL schemas with denormalization and indexing for real-time dashboards",
+    ],
+    skills: [
+      "React",
+      "TypeScript",
+      "NestJS",
+      "Node.js",
+      "AWS ECS",
+      "SQS",
+      "PostgreSQL",
+      "Jest",
+      "CloudWatch",
+    ],
+    achievements: [
+      { label: "Test Coverage", value: "90%" },
+      { label: "MTTR Reduction", value: "40%" },
+      { label: "Spike Buffering", value: "300%" },
+      { label: "Projected Savings", value: "$2M+" },
+    ],
+  },
+]
 
 export function ExperienceSection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [visibleCards, setVisibleCards] = useState<boolean[]>([])
-  const sectionRef = useRef<HTMLElement>(null)
+  return (
+    <section id="experience" className="relative">
+      {experiences.map((exp, index) => (
+        <div key={index}>
+          <ExperienceBlock experience={exp} index={index} />
+          {/* Gradient divider between blocks */}
+          {index < experiences.length - 1 && (
+            <div className="h-px mx-auto max-w-5xl px-6 sm:px-12">
+              <div className="h-full bg-gradient-to-r from-transparent via-border to-transparent" />
+            </div>
+          )}
+        </div>
+      ))}
+    </section>
+  )
+}
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          experiences.forEach((_, index) => {
-            setTimeout(() => {
-              setVisibleCards((prev) => {
-                const newVisible = [...prev]
-                newVisible[index] = true
-                return newVisible
-              })
-            }, index * 500)
-          })
-        }
-      },
-      { threshold: 0.1 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  const experiences = [
-    {
-      title: "Software Engineer",
-      company: "AskTuring.AI",
-      period: "Jan 2026 – Present",
-      location: "San Jose, CA",
-      logo: "https://www.google.com/s2/favicons?domain=askturing.ai&sz=128",
-      description: [
-        "Lead feature development in a fast-paced startup environment: design system architecture, create execution plans, and deliver end-to-end solutions",
-        "Built a Slack DM/mention connector for an agentic RAG system using Python and FastAPI, enabling users to query against recent channel history and attached files",
-        "Designed and implemented file ingestion + vector search pipeline (chunking, embeddings, Weaviate) to improve retrieval quality for unstructured content",
-        "Developed REST APIs with FastAPI for agentic RAG workflows, implementing async processing for low-latency responses and reliable delivery",
-        "Integrated Langfuse tracing to monitor LLM/agent performance, debug retrieval issues, and optimize token usage",
-      ],
-      skills: ["Python", "FastAPI", "Agentic RAG", "REST APIs", "Weaviate", "Langfuse", "Slack API", "Vector Search", "System Design"],
-      achievements: [],
-      website: "https://askturing.ai",
-    },
-    {
-      title: "Software Engineer",
-      company: "PwC",
-      period: "July 2021 – July 2024",
-      location: "India",
-      logo: "https://www.google.com/s2/favicons?domain=pwc.com&sz=128",
-      description: [
-        "Frontend (React/TS): Built intuitive capacity management interfaces using React (TypeScript), achieving 90% unit test coverage via Jest and React Testing Library",
-        "Backend (NestJS): Developed scalable NestJS (Node.js) APIs for quota enforcement, optimizing latency for high-concurrency internal engineering workloads",
-        "Infrastructure (AWS): Deployed containerized services on AWS ECS and utilized SQS to decouple services, buffering 300% traffic spikes",
-        "Reliability (DRI): Served as DRI, utilizing CloudWatch to monitor resource allocation and system health, reducing Mean Time to Resolution (MTTR) by 40%",
-        "Database Tuning: Optimized PostgreSQL schemas using denormalization and indexing to power real-time data visualization dashboards for stakeholders",
-      ],
-      skills: [
-        "React",
-        "TypeScript",
-        "NestJS",
-        "Node.js",
-        "AWS ECS",
-        "SQS",
-        "PostgreSQL",
-        "Jest",
-        "CloudWatch",
-        "Unit Testing",
-      ],
-      achievements: [
-        { icon: Award, text: "Achieved 90% unit test coverage via Jest and React Testing Library" },
-        { icon: Award, text: "Reduced MTTR by 40% through proactive monitoring and system health management" },
-        { icon: Award, text: "Buffered 300% traffic spikes using SQS to decouple services" },
-      ],
-    },
-  ]
+function ExperienceBlock({
+  experience,
+  index,
+}: {
+  experience: (typeof experiences)[0]
+  index: number
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: "-100px" })
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  })
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
   return (
-    <section
-      id="experience"
-      ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-muted/30 via-background to-primary/5 relative overflow-hidden"
+    <div
+      ref={ref}
+      className="relative min-h-screen flex items-center py-24 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-l from-primary/5 via-transparent to-primary/5 animate-pulse" />
-      <div
-        className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"
-        style={{ animationDelay: "1.5s" }}
-      />
+      {/* Massive outlined company name in background */}
+      <motion.div
+        style={{ opacity: bgOpacity }}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
+      >
+        <span className="text-[20vw] font-bold tracking-tighter text-outline-white whitespace-nowrap">
+          {experience.company}
+        </span>
+      </motion.div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <h2
-          className={`text-4xl sm:text-5xl font-black text-center mb-16 text-foreground transition-all duration-1500 ease-out transform ${
-            isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-16 scale-75"
-          }`}
-        >
-          Work{" "}
-          <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">Experience</span>
-        </h2>
-
-        <div className="space-y-12">
-          {experiences.map((exp, index) => (
-            <Card
-              key={index}
-              className={`bg-card/80 backdrop-blur-sm border-border/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-1000 ease-out hover:scale-[1.02] hover:-rotate-1 transform ${
-                visibleCards[index]
-                  ? "opacity-100 translate-x-0 rotate-0 scale-100"
-                  : index % 2 === 0
-                    ? "opacity-0 -translate-x-20 -rotate-3 scale-90"
-                    : "opacity-0 translate-x-20 rotate-3 scale-90"
-              }`}
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-12 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Left: Company + Role */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <CardHeader>
-                <div className="flex items-start gap-4 mb-4">
-                  {exp.logo && (
-                    <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-muted/30 rounded-lg border-2 border-border p-2">
-                      <img
-                        src={exp.logo}
-                        alt={`${exp.company} logo`}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          // If logo fails, show company initial as fallback
-                          const initial = exp.company.charAt(0).toUpperCase();
-                          e.currentTarget.style.display = 'none';
-                          const parent = e.currentTarget.parentElement;
-                          if (parent && !parent.querySelector('.logo-fallback')) {
-                            const fallback = document.createElement('div');
-                            fallback.className = 'logo-fallback w-full h-full flex items-center justify-center bg-primary/10 rounded text-primary font-bold text-xl';
-                            fallback.textContent = initial;
-                            parent.appendChild(fallback);
-                          }
-                        }}
-                      />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                      <CardTitle className="text-2xl text-foreground font-bold">{exp.title}</CardTitle>
-                      <div className="flex items-center text-muted-foreground text-sm font-medium">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        {exp.period}
-                      </div>
-                    </div>
-                    <div className="flex items-center text-muted-foreground mt-2">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      {exp.website ? (
-                        <a
-                          href={exp.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-semibold text-primary hover:underline"
-                        >
-                          {exp.company}
-                        </a>
-                      ) : (
-                        <span className="font-semibold text-primary">{exp.company}</span>
-                      )}
-                      <span className="mx-2">•</span>
-                      <span>{exp.location}</span>
-                    </div>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                {exp.achievements.length > 0 && (
-                  <div className="mb-6 p-6 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl border border-primary/20">
-                    <h4 className="font-bold text-foreground mb-4 flex items-center text-lg">
-                      <Award className="h-5 w-5 mr-2 text-primary" />
-                      Key Achievements
-                    </h4>
-                    <div className="space-y-3">
-                      {exp.achievements.map((achievement, i) => (
-                        <div key={i} className="flex items-start text-sm">
-                          <achievement.icon className="h-5 w-5 mr-3 mt-0.5 text-primary flex-shrink-0" />
-                          <span className="text-muted-foreground font-medium">{achievement.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+              <div className="flex items-center gap-3 mb-4">
+                <h3 className="text-4xl sm:text-5xl font-bold tracking-tighter text-foreground">
+                  {experience.company}
+                </h3>
+                {experience.website && (
+                  <a
+                    href={experience.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors cursor-pointer"
+                    aria-label={`Visit ${experience.company}`}
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
                 )}
+              </div>
+              <p className="text-lg font-medium text-foreground mb-1">
+                {experience.role}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {experience.period} -- {experience.location}
+              </p>
+            </motion.div>
 
-                <ul className="space-y-3 mb-6">
-                  {exp.description.map((item, i) => (
-                    <li key={i} className="text-muted-foreground flex items-start">
-                      <span className="text-primary mr-3 mt-2 font-bold">•</span>
-                      <span className="text-pretty leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+            {/* Animated horizontal line divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={inView ? { scaleX: 1 } : {}}
+              transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="h-px bg-gradient-to-r from-primary via-primary/50 to-transparent mt-6 mb-8 origin-left"
+            />
 
-                <div className="flex flex-wrap gap-2">
-                  {exp.skills.map((skill, i) => (
-                    <Badge
-                      key={i}
-                      variant="outline"
-                      className="text-xs hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-semibold"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+            {/* Achievements grid */}
+            {experience.achievements && (
+              <div className="grid grid-cols-2 gap-4">
+                {experience.achievements.map((ach, i) => (
+                  <AchievementCard
+                    key={i}
+                    achievement={ach}
+                    index={i}
+                    inView={inView}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Skills */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex flex-wrap gap-2 mt-8"
+            >
+              {experience.skills.map((skill, i) => (
+                <span
+                  key={i}
+                  className="text-[11px] font-medium uppercase tracking-wider px-3 py-1.5 rounded-full border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-default"
+                >
+                  {skill}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right: Bullet points with clip-path reveal */}
+          <div>
+            <ul className="space-y-5">
+              {experience.bullets.map((bullet, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
+                  animate={
+                    inView
+                      ? { opacity: 1, clipPath: "inset(0 0% 0 0)" }
+                      : {}
+                  }
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.3 + i * 0.12,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="flex items-start text-sm text-muted-foreground leading-relaxed"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-3 shrink-0" />
+                  {bullet}
+                </motion.li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  )
+}
+
+function AchievementCard({
+  achievement,
+  index,
+  inView,
+}: {
+  achievement: { label: string; value: string }
+  index: number
+  inView: boolean
+}) {
+  const [displayValue, setDisplayValue] = useState(achievement.value)
+
+  useEffect(() => {
+    if (!inView) return
+
+    // Parse numeric part for counting animation
+    const match = achievement.value.match(/^(\$?)(\d+)(.*)$/)
+    if (!match) return
+
+    const prefix = match[1]
+    const target = parseInt(match[2], 10)
+    const suffix = match[3]
+
+    const controls = animate(0, target, {
+      duration: 1.5,
+      delay: 0.5 + index * 0.15,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate(value) {
+        setDisplayValue(`${prefix}${Math.round(value)}${suffix}`)
+      },
+    })
+
+    return () => controls.stop()
+  }, [inView, achievement.value, index])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+      animate={inView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
+      transition={{ duration: 0.5, delay: 0.4 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className="p-4 rounded-xl bg-card border border-border"
+    >
+      <div className="text-2xl font-bold text-primary tabular-nums">
+        {displayValue}
+      </div>
+      <div className="text-xs text-muted-foreground mt-1 font-medium uppercase tracking-wider">
+        {achievement.label}
+      </div>
+    </motion.div>
   )
 }

@@ -1,146 +1,134 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Work", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+]
+
 export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      const currentY = window.scrollY
+      setScrolled(currentY > 50)
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setIsMobileMenuOpen(false)
+      if (currentY < 50) {
+        setVisible(true)
+      } else if (currentY < lastScrollY) {
+        setVisible(true)
+      } else if (currentY > lastScrollY && currentY > 200) {
+        setVisible(false)
+      }
+
+      setLastScrollY(currentY)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [lastScrollY])
+
+  const handleClick = (href: string) => {
+    setMobileOpen(false)
+    const el = document.querySelector(href)
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" })
     }
   }
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="font-light text-xl text-foreground tracking-wide">Ankit Mukherjee</div>
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: visible ? 0 : -100 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+          scrolled
+            ? "bg-background/80 backdrop-blur-md border-b border-border/50"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <motion.a
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault()
+              window.scrollTo({ top: 0, behavior: "smooth" })
+            }}
+            className="text-sm font-bold tracking-widest uppercase text-foreground cursor-pointer"
+            whileHover={{ opacity: 0.7 }}
+          >
+            AM
+          </motion.a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-12">
-            <button
-              onClick={() => scrollToSection("about")}
-              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
-            >
-              <span className="relative z-10">About</span>
-              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
-            </button>
-            <button
-              onClick={() => scrollToSection("experience")}
-              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
-            >
-              <span className="relative z-10">Experience</span>
-              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
-            </button>
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
-            >
-              <span className="relative z-10">Projects</span>
-              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
-            </button>
-            <button
-              onClick={() => scrollToSection("skills")}
-              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
-            >
-              <span className="relative z-10">Skills</span>
-              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
-            </button>
-            <button
-              onClick={() => scrollToSection("recommendations")}
-              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
-            >
-              <span className="relative z-10">Recommendations</span>
-              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="relative text-muted-foreground hover:text-foreground transition-all duration-300 font-light text-sm tracking-wide group"
-            >
-              <span className="relative z-10">Contact</span>
-              <div className="absolute bottom-0 left-0 w-0 h-px bg-foreground transition-all duration-300 group-hover:w-full"></div>
-            </button>
-            <div className="w-px h-6 bg-border mx-4"></div>
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleClick(link.href)
+                }}
+                className="text-xs font-medium tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
+              >
+                {link.label}
+              </a>
+            ))}
             <ThemeToggle />
           </div>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden flex items-center space-x-4">
+          <div className="flex md:hidden items-center gap-3">
             <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="h-10 w-10"
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 text-foreground cursor-pointer"
+              aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+      </motion.nav>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border">
-            <div className="px-4 pt-4 pb-6 space-y-2">
-              <button
-                onClick={() => scrollToSection("about")}
-                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-lg flex flex-col items-center justify-center gap-8 md:hidden"
+          >
+            {navLinks.map((link, i) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleClick(link.href)
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                className="text-2xl font-bold tracking-widest uppercase text-foreground cursor-pointer"
               >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("experience")}
-                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
-              >
-                Experience
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => scrollToSection("skills")}
-                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
-              >
-                Skills
-              </button>
-              <button
-                onClick={() => scrollToSection("recommendations")}
-                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
-              >
-                Recommendations
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="block px-3 py-3 text-muted-foreground hover:text-foreground transition-all duration-300 w-full text-left font-light hover:bg-muted/20 hover:translate-x-2 rounded-sm"
-              >
-                Contact
-              </button>
-            </div>
-          </div>
+                {link.label}
+              </motion.a>
+            ))}
+          </motion.div>
         )}
-      </div>
-    </nav>
+      </AnimatePresence>
+    </>
   )
 }

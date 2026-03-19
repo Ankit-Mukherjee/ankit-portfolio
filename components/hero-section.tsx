@@ -1,193 +1,136 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
+import { useRef } from "react"
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import Image from "next/image"
+import { Github, Linkedin, Mail, ChevronDown } from "lucide-react"
 
 export function HeroSection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [showElements, setShowElements] = useState({
-    image: false,
-    name: false,
-    description: false,
-    buttons: false,
-    social: false,
-    arrow: false,
-  })
+  const containerRef = useRef<HTMLDivElement>(null)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 100)
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 })
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 })
 
-    // Staggered dramatic entrances
-    setTimeout(() => setShowElements((prev) => ({ ...prev, image: true })), 300)
-    setTimeout(() => setShowElements((prev) => ({ ...prev, name: true })), 800)
-    setTimeout(() => setShowElements((prev) => ({ ...prev, description: true })), 1200)
-    setTimeout(() => setShowElements((prev) => ({ ...prev, buttons: true })), 1600)
-    setTimeout(() => setShowElements((prev) => ({ ...prev, social: true })), 2000)
-    setTimeout(() => setShowElements((prev) => ({ ...prev, arrow: true })), 2400)
+  const imageX = useTransform(springX, [-500, 500], [15, -15])
+  const imageY = useTransform(springY, [-500, 500], [15, -15])
 
-    return () => clearTimeout(timer)
-  }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = containerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    mouseX.set(e.clientX - rect.left - rect.width / 2)
+    mouseY.set(e.clientY - rect.top - rect.height / 2)
   }
 
+  const socials = [
+    { href: "https://github.com/Ankit-Mukherjee", icon: Github, label: "GitHub" },
+    { href: "https://www.linkedin.com/in/ankit281", icon: Linkedin, label: "LinkedIn" },
+    { href: "mailto:ank26.m@gmail.com", icon: Mail, label: "Email" },
+  ]
+
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden bg-background pt-16">
-      {/* Modern geometric background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-muted/5"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-muted/3"></div>
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-foreground rotate-45"></div>
-        <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-foreground rotate-45"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-3 h-3 bg-foreground/20 rotate-45"></div>
-      </div>
+    <section
+      id="hero"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="relative h-screen w-full overflow-hidden bg-background flex items-center justify-center"
+    >
+      {/* Background subtle grid */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(6,182,212,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.3) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left side - Content */}
-          <div className="space-y-8">
-            <div
-              className={`transition-all duration-1000 ease-out transform ${
-                showElements.name ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-              }`}
-            >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-foreground leading-tight">
-                <span className="block animate-fade-in-up" style={{ animationDelay: "0.2s" }}>Ankit</span>
-                <span className="block font-medium animate-fade-in-up" style={{ animationDelay: "0.4s" }}>Mukherjee</span>
-              </h1>
-            </div>
+      {/* Main content */}
+      <div className="relative z-10 w-full max-w-[90vw] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 px-6">
+        {/* Text */}
+        <div className="flex-1 text-center lg:text-left">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="name-shimmer text-[13vw] lg:text-[9vw] font-bold leading-[0.9] tracking-tighter"
+          >
+            ANKIT
+            <br />
+            MUKHERJEE
+          </motion.h1>
 
-            <div
-              className={`transition-all duration-1000 ease-out transform delay-200 ${
-                showElements.description ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-              }`}
-            >
-              <div className="space-y-4">
-                <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed">
-                  Full-Stack Software Engineer
-                </p>
-                <p className="text-base text-foreground font-medium">
-                  Building Agentic AI Workflows @{" "}
-                  <a
-                    href="https://askturing.ai"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline transition-all duration-300"
-                  >
-                    AskTuring.AI
-                  </a>
-                </p>
-                <p className="text-sm text-muted-foreground font-light max-w-md">
-                  Specializing in FastAPI, Agentic RAG, and REST API development. Building scalable AI-powered systems with Python in a fast-paced startup environment.
-                </p>
-              </div>
-            </div>
-
-            <div
-              className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 ease-out transform delay-400 ${
-                showElements.buttons ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-              }`}
-            >
-              <Button
-                onClick={() => scrollToSection("projects")}
-                size="lg"
-                className="bg-foreground hover:bg-foreground/90 text-background px-8 py-4 rounded-none transition-all duration-300 text-base font-medium w-full sm:w-auto hover:scale-105 animate-glow"
-              >
-                View Projects
-              </Button>
-              <Button
-                onClick={() => scrollToSection("contact")}
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 rounded-none transition-all duration-300 text-base font-medium border-2 border-black dark:border-white text-black dark:text-white bg-white dark:bg-black hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black w-full sm:w-auto hover:scale-105 animate-float"
-              >
-                Contact Me
-              </Button>
-            </div>
-
-            <div
-              className={`flex space-x-6 transition-all duration-1000 ease-out transform delay-600 ${
-                showElements.social ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-              }`}
-            >
-              {[
-                { href: "https://github.com/Ankit-Mukherjee", icon: Github, label: "GitHub" },
-                { href: "https://www.linkedin.com/in/ankit281", icon: Linkedin, label: "LinkedIn" },
-                { href: "mailto:ank26.m@gmail.com", icon: Mail, label: "Email" },
-              ].map(({ href, icon: Icon, label }, index) => (
-                <a
-                  key={index}
-                  href={href}
-                  target={href.startsWith("mailto:") ? undefined : "_blank"}
-                  rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                  className="text-muted-foreground hover:text-foreground transition-all duration-300 group hover:scale-110"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <Icon className="h-5 w-5 mb-1 group-hover:animate-bounce" />
-                  <span className="text-xs font-light block group-hover:translate-y-1 transition-transform">{label}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Right side - Image */}
-          <div className="flex justify-center lg:justify-end">
-            <div
-              className={`relative transition-all duration-1000 ease-out transform ${
-                showElements.image
-                  ? "opacity-100 translate-x-0 scale-100"
-                  : "opacity-0 translate-x-10 scale-95"
-              }`}
-            >
-              <div className="relative group">
-                {/* Animated background circles */}
-                <div className="absolute -inset-4 bg-muted/20 rounded-full blur-xl animate-pulse"></div>
-                <div className="absolute -inset-2 bg-muted/10 rounded-full blur-lg animate-pulse" style={{ animationDelay: "1s" }}></div>
-                
-                {/* Main circular image */}
-                <div className="relative z-10">
-                  <Image
-                    src="/images/ankit.png"
-                    alt="Ankit Mukherjee"
-                    width={300}
-                    height={300}
-                    className="rounded-full object-cover object-center border-2 border-border shadow-2xl transition-all duration-700 hover:scale-110 hover:rotate-3 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96"
-                    style={{
-                      objectPosition: "center 20%",
-                      aspectRatio: "1/1",
-                    }}
-                    priority
-                  />
-                  
-                  {/* Floating animation elements */}
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-foreground rounded-full animate-bounce" style={{ animationDelay: "0.5s" }}></div>
-                  <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-muted rounded-full animate-bounce" style={{ animationDelay: "1.5s" }}></div>
-                  <div className="absolute top-1/2 -left-4 w-2 h-2 bg-foreground/60 rounded-full animate-pulse" style={{ animationDelay: "2s" }}></div>
-                  <div className="absolute top-1/4 -right-6 w-2 h-2 bg-muted/80 rounded-full animate-pulse" style={{ animationDelay: "2.5s" }}></div>
-                </div>
-                
-                {/* Rotating border animation */}
-                <div className="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-foreground via-muted to-foreground animate-spin opacity-20" style={{ animationDuration: "8s" }}></div>
-              </div>
-            </div>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.4,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="mt-6 text-xs sm:text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground"
+          >
+            Full-Stack Software Engineer
+          </motion.p>
         </div>
+
+        {/* Profile image with parallax */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          style={{ x: imageX, y: imageY }}
+          className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 flex-shrink-0 will-change-transform"
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/20 to-transparent blur-2xl" />
+          <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-white/10">
+            <Image
+              src="/images/ankit.png"
+              alt="Ankit Mukherjee"
+              fill
+              priority
+              className="object-cover"
+              style={{ objectPosition: "center 20%" }}
+            />
+          </div>
+        </motion.div>
       </div>
 
-      <button
-        onClick={() => scrollToSection("about")}
-        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 text-muted-foreground hover:text-foreground transition-all duration-500 hover:scale-110 ${
-          showElements.arrow ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-        }`}
+      {/* Social icons - bottom left */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+        className="absolute bottom-8 left-6 sm:left-10 flex flex-col gap-4 z-10"
       >
-        <ArrowDown className="h-5 w-5" />
-      </button>
+        {socials.map(({ href, icon: Icon, label }) => (
+          <a
+            key={label}
+            href={href}
+            target={href.startsWith("mailto:") ? undefined : "_blank"}
+            rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+            aria-label={label}
+            className="text-muted-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+          >
+            <Icon className="w-5 h-5" />
+          </a>
+        ))}
+        <div className="w-px h-16 bg-muted-foreground/30 mx-auto" />
+      </motion.div>
+
+      {/* Scroll indicator - bottom center */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+      >
+        <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+          Scroll
+        </span>
+        <ChevronDown className="w-4 h-4 text-muted-foreground animate-scroll-bounce" />
+      </motion.div>
     </section>
   )
 }

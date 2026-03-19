@@ -10,8 +10,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Ankit Mukherjee - Full-Stack Software Engineer",
   description:
-    "Full-Stack Software Engineer (3+ YOE) specializing in building scalable web applications with React (TypeScript) and Node.js. Expertise in Agentic AI workflows and cloud resource management systems. Currently at AskTuring.AI.",
-  generator: "v0.app",
+    "Full-Stack Software Engineer specializing in building scalable web applications with React, Python & FastAPI. Expertise in Agentic AI workflows and cloud systems. Currently at AskTuring.AI.",
 }
 
 export default function RootLayout({
@@ -20,12 +19,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarnings>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         <Suspense fallback={null}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem={true}
             disableTransitionOnChange={false}
             storageKey="ankit-portfolio-theme"
