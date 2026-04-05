@@ -1,25 +1,27 @@
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
-import { ScrollReveal } from "@/components/scroll-reveal"
-import { HorizontalProjects } from "@/components/horizontal-projects"
-import { ExperienceSection } from "@/components/experience-section"
-import { SkillsMarquee } from "@/components/skills-marquee"
 import { AboutSection } from "@/components/about-section"
-import { RecommendationsSection } from "@/components/recommendations-section"
+import { MarqueeSection } from "@/components/marquee-section"
+import { SkillsSection } from "@/components/skills-section"
+import { ExperienceSection } from "@/components/experience-section"
+import { WorkSection } from "@/components/work-section"
+import { EducationSection } from "@/components/education-section"
 import { ContactSection } from "@/components/contact-section"
 import { FooterSection } from "@/components/footer-section"
+import { CursorHeatmap } from "@/components/cursor-heatmap"
 
 export default function Home() {
   return (
-    <main className="min-h-screen pb-0">
+    <main className="min-h-screen bg-white">
+      <CursorHeatmap />
       <Navigation />
       <HeroSection />
-      <ScrollReveal />
-      <HorizontalProjects />
-      <ExperienceSection />
-      <SkillsMarquee />
       <AboutSection />
-      <RecommendationsSection />
+      <MarqueeSection />
+      <SkillsSection />
+      <ExperienceSection />
+      <WorkSection />
+      <EducationSection />
       <ContactSection />
       <FooterSection />
     </main>
