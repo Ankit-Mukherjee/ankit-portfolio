@@ -1,175 +1,82 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
+import Image from "next/image"
 
 export function AboutSection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [showElements, setShowElements] = useState({
-    title: false,
-    text1: false,
-    text2: false,
-    badges: false,
-    card: false,
-  })
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          setTimeout(() => setShowElements((prev) => ({ ...prev, title: true })), 200)
-          setTimeout(() => setShowElements((prev) => ({ ...prev, text1: true })), 600)
-          setTimeout(() => setShowElements((prev) => ({ ...prev, text2: true })), 1000)
-          setTimeout(() => setShowElements((prev) => ({ ...prev, badges: true })), 1400)
-          setTimeout(() => setShowElements((prev) => ({ ...prev, card: true })), 800)
-        }
-      },
-      { threshold: 0.1 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="py-24 bg-background"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Modern split layout */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Left side - About content */}
-          <div className="lg:col-span-7 space-y-12">
-            <div
-              className={`transition-all duration-1000 ease-out transform ${
-                showElements.title ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+    <section id="about" className="py-24 sm:py-32 bg-white" ref={ref}>
+      <div className="max-w-5xl mx-auto px-6 sm:px-10">
+        {/* Green box with all content */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="px-5 sm:px-8 lg:px-12 py-10 sm:py-12 lg:py-14"
+          style={{ backgroundColor: "rgb(190, 255, 162)" }}
+        >
+          {/* Label */}
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="block text-[11px] font-medium tracking-[0.3em] text-black/40 mb-8 text-center"
+          >
+            MYSELF
+          </motion.span>
+
+          {/* One big bold header — left aligned */}
+          <div className="text-left max-w-3xl">
+            <motion.h2
+              className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-black"
             >
-              <h2 className="text-4xl sm:text-5xl font-light text-foreground leading-tight">
-                About
-                <span className="block font-medium">Me</span>
-              </h2>
-            </div>
-
-            <div className="space-y-8">
-              <div
-                className={`transition-all duration-1000 ease-out transform ${
-                  showElements.text1 ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-                }`}
-              >
-                <p className="text-lg text-muted-foreground leading-relaxed font-light">
-                  I'm a <span className="text-foreground font-medium">Full-Stack Software Engineer</span>{" "}
-                  with 3+ years of experience specializing in building scalable web applications. Currently working at{" "}
-                  <span className="text-foreground font-medium">AskTuring.AI</span>, a fast-paced AI startup, where I lead features, 
-                  do system design, come up with execution plans, and build them end-to-end. I specialize in FastAPI, Agentic RAG, and 
-                  REST API development using Python, creating scalable AI-powered systems that deliver real value.
-                </p>
-              </div>
-
-              <div
-                className={`transition-all duration-1000 ease-out transform ${
-                  showElements.text2 ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-                }`}
-              >
-                <p className="text-lg text-muted-foreground leading-relaxed font-light">
-                  Previously at PwC, I developed scalable NestJS APIs for quota enforcement and built intuitive capacity management 
-                  interfaces using React (TypeScript), achieving 90% unit test coverage. I deployed containerized services on AWS ECS 
-                  and utilized SQS to decouple services, buffering 300% traffic spikes. I'm passionate about bridging the gap between 
-                  complex infrastructure and intuitive user experiences.
-                </p>
-              </div>
-            </div>
-
-            <div
-              className={`transition-all duration-1000 ease-out transform ${
-                showElements.badges ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-            >
-              <h3 className="text-xl font-medium text-foreground mb-6">Core Expertise</h3>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  "Full-Stack Development",
-                  "Agentic AI Workflows",
-                  "Cloud Architecture",
-                  "Microservices",
-                  "System Reliability",
-                  "Vector Search & RAG",
-                ].map((skill, index) => (
-                  <div
-                    key={skill}
-                    className="p-4 bg-muted/30 border border-border hover:border-foreground/30 transition-all duration-300 group"
-                    style={{
-                      animationDelay: `${index * 100}ms`,
-                    }}
-                  >
-                    <span className="text-foreground font-medium group-hover:text-muted-foreground transition-colors">
-                      {skill}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+              {"FULL-STACK ENGINEER & AI SYSTEMS BUILDER SHIPPING 0-TO-1 PRODUCTS AT SCALE.".split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.15 + i * 0.04,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="inline-block mr-[0.25em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h2>
           </div>
 
-          {/* Right side - Education & Stats */}
-          <div className="lg:col-span-5 space-y-8">
-            <div
-              className={`transition-all duration-1000 ease-out transform ${
-                showElements.card ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-              }`}
-            >
-              <div className="bg-muted/20 border border-border p-8">
-                <h3 className="text-2xl font-light text-foreground mb-8">Education</h3>
-                <div className="space-y-8">
-                  {[
-                    {
-                      degree: "MS in Computer Science (Focus: AI/ML)",
-                      school: "University at Buffalo, SUNY",
-                      period: "Dec 2025",
-                      gpa: "GPA: 3.73",
-                    },
-                    {
-                      degree: "BS in Information Science",
-                      school: "Institute of Engineering and Management",
-                      period: "July 2021",
-                    },
-                  ].map((edu, index) => (
-                    <div
-                      key={index}
-                      className="border-l-2 border-foreground pl-6"
-                      style={{ transitionDelay: `${800 + index * 200}ms` }}
-                    >
-                      <h4 className="font-medium text-foreground text-lg mb-1">{edu.degree}</h4>
-                      <p className="text-muted-foreground font-light mb-1">{edu.school}</p>
-                      <p className="text-sm text-foreground font-medium">{edu.period}</p>
-                      {edu.gpa && <p className="text-sm text-muted-foreground font-light">{edu.gpa}</p>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Watermelon cat */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 sm:mt-8 mx-auto w-[350px] h-[430px] sm:w-[450px] sm:h-[550px] lg:w-[520px] lg:h-[640px] relative overflow-hidden"
+          >
+            <Image
+              src="/images/watermelon-cat.png"
+              alt="Watermelon cat"
+              fill
+              className="object-contain"
+            />
+          </motion.div>
 
-            {/* Stats section */}
-            <div className="grid grid-cols-2 gap-6">
-              <div className="text-center p-6 bg-muted/20 border border-border">
-                <div className="text-3xl font-light text-foreground mb-2">3+</div>
-                <div className="text-sm text-muted-foreground font-light">Years Experience</div>
-              </div>
-              <div className="text-center p-6 bg-muted/20 border border-border">
-                <div className="text-3xl font-light text-foreground mb-2">90%</div>
-                <div className="text-sm text-muted-foreground font-light">Test Coverage</div>
-              </div>
-            </div>
-          </div>
-        </div>
+          {/* Quote */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="text-xs sm:text-sm font-bold tracking-[0.12em] text-black/60 text-right -mt-10 sm:-mt-14 relative z-10 uppercase max-w-sm ml-auto leading-relaxed"
+          >
+            I BELIEVE THE BEST ENGINEERING HAPPENS WHERE EXTREME OWNERSHIP AND CREATIVE PROBLEM-SOLVING INTERSECT.
+          </motion.p>
+        </motion.div>
       </div>
     </section>
   )
