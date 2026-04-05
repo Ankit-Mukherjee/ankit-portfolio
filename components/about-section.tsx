@@ -10,73 +10,74 @@ export function AboutSection() {
 
   return (
     <section id="about" className="py-24 sm:py-32 bg-white" ref={ref}>
-      <div className="max-w-5xl mx-auto px-6 sm:px-10">
-        {/* Green box with all content */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+      <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center">
+        {/* Label */}
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="px-5 sm:px-8 lg:px-12 py-10 sm:py-12 lg:py-14"
-          style={{ backgroundColor: "rgb(190, 255, 162)" }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="block text-[11px] font-medium tracking-[0.3em] text-black mb-8"
         >
-          {/* Label */}
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="block text-[11px] font-medium tracking-[0.3em] text-black/40 mb-8 text-center"
-          >
-            MYSELF
-          </motion.span>
+          MYSELF
+        </motion.span>
 
-          {/* One big bold header — left aligned */}
-          <div className="text-left max-w-3xl">
-            <motion.h2
-              className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] text-black"
-            >
-              {"FULL-STACK ENGINEER & AI SYSTEMS BUILDER SHIPPING 0-TO-1 PRODUCTS AT SCALE.".split(" ").map((word, i) => (
+        {/* Big bold centered heading */}
+        <motion.h2
+          className="text-[5.5vw] sm:text-[3.5vw] lg:text-[2.5vw] font-black tracking-[-0.02em] leading-[1.15] text-black text-center max-w-[90%] sm:max-w-[600px] mx-auto"
+        >
+          {["FULL-STACK ENGINEER & AI", "SYSTEMS BUILDER", "CRAFTING HIGH-IMPACT", "EXPERIENCES."].map((line, lineIdx) => (
+            <span key={lineIdx} className="block">
+              {line.split(" ").map((word, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 50 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{
                     duration: 0.5,
-                    delay: 0.15 + i * 0.04,
+                    delay: 0.15 + (lineIdx * 3 + i) * 0.03,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="inline-block mr-[0.25em]"
+                  className="inline-block mr-[0.28em]"
                 >
                   {word}
                 </motion.span>
               ))}
-            </motion.h2>
-          </div>
+            </span>
+          ))}
+        </motion.h2>
 
-          {/* Watermelon cat */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 sm:mt-8 mx-auto w-[350px] h-[430px] sm:w-[450px] sm:h-[550px] lg:w-[520px] lg:h-[640px] relative overflow-hidden"
-          >
-            <Image
-              src="/images/watermelon-cat.png"
-              alt="Watermelon cat"
-              fill
-              className="object-contain"
-            />
-          </motion.div>
-
-          {/* Quote */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="text-xs sm:text-sm font-bold tracking-[0.12em] text-black/60 text-right -mt-10 sm:-mt-14 relative z-10 uppercase max-w-sm ml-auto leading-relaxed"
-          >
-            I BELIEVE THE BEST ENGINEERING HAPPENS WHERE EXTREME OWNERSHIP AND CREATIVE PROBLEM-SOLVING INTERSECT.
-          </motion.p>
+        {/* Centered image */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-10 mx-auto w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[450px] lg:h-[450px] relative overflow-hidden"
+        >
+          <Image
+            src="/images/watermelon-cat.png"
+            alt="Watermelon cat"
+            fill
+            className="object-cover"
+          />
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="text-[11px] sm:text-xs font-medium tracking-[0.15em] text-black mt-3 uppercase leading-relaxed"
+        >
+          I LOVE CATS.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1.0 }}
+          className="text-[11px] sm:text-xs font-medium tracking-[0.15em] text-black mt-6 uppercase leading-relaxed max-w-sm mx-auto"
+        >
+          I BELIEVE THE BEST ENGINEERING HAPPENS WHERE EXTREME OWNERSHIP AND CREATIVE PROBLEM-SOLVING INTERSECT.
+        </motion.p>
       </div>
     </section>
   )
