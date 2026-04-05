@@ -65,7 +65,7 @@ export function ContactSection() {
           className="flex justify-center mt-6"
         >
           <a
-            href="/resume.pdf"
+            href="/Ankit_Resume.pdf"
             download
             className="group flex items-center gap-2 text-[11px] font-medium tracking-[0.2em] text-neutral-400 hover:text-black transition-colors cursor-pointer"
           >
