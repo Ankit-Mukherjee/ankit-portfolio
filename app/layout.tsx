@@ -5,13 +5,13 @@ import { SmoothScroll } from "@/components/smooth-scroll"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Ankit Mukherjee - Full-Stack Software Engineer",
+  title: "Ankit Mukherjee - AI Engineer",
   description:
-    "Full-Stack Software Engineer specializing in building scalable web applications with React, Python & FastAPI. Expertise in Agentic AI workflows and cloud systems.",
+    "AI Engineer specializing in building scalable web applications with React, Python & FastAPI. Expertise in Agentic AI workflows and cloud systems.",
   metadataBase: new URL("https://ankitmuk.com"),
   openGraph: {
-    title: "Ankit Mukherjee - Full-Stack Software Engineer",
-    description: "Full-Stack Engineer & AI Systems Builder crafting high-impact experiences.",
+    title: "Ankit Mukherjee - AI Engineer",
+    description: "AI Engineer at Pure Storage building production-grade agentic AI systems on AWS.",
     url: "https://ankitmuk.com",
     siteName: "Ankit Mukherjee",
     images: [
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ankit Mukherjee - Full-Stack Software Engineer",
-    description: "Full-Stack Engineer & AI Systems Builder crafting high-impact experiences.",
+    title: "Ankit Mukherjee - AI Engineer",
+    description: "AI Engineer at Pure Storage building production-grade agentic AI systems on AWS.",
     images: ["/og-image.png"],
   },
 }
@@ -40,11 +40,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Yellowtail&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased bg-white text-black">
+      <body className="font-sans antialiased bg-[#f4f4f4] text-[#101010] tracking-[-0.02em]">
         <SmoothScroll />
         {children}
         <Analytics />
