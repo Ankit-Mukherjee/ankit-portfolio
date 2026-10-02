@@ -3,6 +3,8 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { kindWords } from "./site-data"
+import { Doodle, Sticker } from "./doodles"
+import { Words } from "./words"
 
 const placement = ["lg:mt-0 lg:-rotate-2", "lg:mt-24 lg:rotate-1", "lg:mt-8 lg:rotate-2"]
 
@@ -11,8 +13,10 @@ export function KindWords() {
     <section className="px-6 pb-32 pt-10">
       <div className="mb-16 text-center">
         <p className="font-serif-display text-2xl">What colleagues say</p>
-        <h2 className="display text-6xl sm:text-8xl">
-          Kind <span className="font-serif-display normal-case tracking-[-0.03em]">words</span>
+        <h2 className="relative inline-block display text-6xl sm:text-8xl">
+          <Words text="Kind" /> <Words text="words" className="font-serif-display normal-case tracking-[-0.03em]" delay={0.12} />
+          <Doodle kind="star" delay={0.6} className="absolute -right-12 -top-3 h-10 w-10 text-[#1230f0]" />
+          <Sticker className="absolute -left-24 bottom-0 hidden sm:inline-block" rotate={-9} color="#8fd3b6">Real people</Sticker>
         </h2>
       </div>
       <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-3">
@@ -26,11 +30,12 @@ export function KindWords() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: i * 0.1 }}
-            className={`block ${placement[i]}`}
+            whileHover={{ rotate: 0, scale: 1.02 }}
+            className={`group block transition-transform ${placement[i]}`}
           >
             <div className="relative">
               <Image src={k.image} alt={k.name} width={500} height={600} className={`aspect-[4/5] w-full object-cover ${k.name === "Bhagya" ? "object-[50%_30%]" : "object-top"}`} />
-              <span className="font-script absolute left-1/2 top-6 -translate-x-1/2 -rotate-3 text-5xl text-[#1230f0] [text-shadow:0_0_0_#fff,2px_2px_0_#fff,-2px_-2px_0_#fff,2px_-2px_0_#fff,-2px_2px_0_#fff]">
+              <span className="font-script absolute left-1/2 top-6 -translate-x-1/2 -rotate-3 text-5xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110 text-[#1230f0] [text-shadow:0_0_0_#fff,2px_2px_0_#fff,-2px_-2px_0_#fff,2px_-2px_0_#fff,-2px_2px_0_#fff]">
                 {k.name}
               </span>
             </div>
