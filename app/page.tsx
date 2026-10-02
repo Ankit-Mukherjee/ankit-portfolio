@@ -1,29 +1,23 @@
-import { Navigation } from "@/components/navigation"
-import { HeroSection } from "@/components/hero-section"
-import { AboutSection } from "@/components/about-section"
-import { MarqueeSection } from "@/components/marquee-section"
-import { SkillsSection } from "@/components/skills-section"
-import { ExperienceSection } from "@/components/experience-section"
-import { WorkSection } from "@/components/work-section"
-import { EducationSection } from "@/components/education-section"
-import { ContactSection } from "@/components/contact-section"
-import { FooterSection } from "@/components/footer-section"
-import { CursorHeatmap } from "@/components/cursor-heatmap"
+import { Splash } from "@/components/splash"
+import { Nav } from "@/components/nav"
+import { Hero } from "@/components/hero"
+import { About } from "@/components/about"
+import { Featured } from "@/components/featured"
+import { Services } from "@/components/services"
+import { KindWords } from "@/components/kind-words"
+import { Footer } from "@/components/footer"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
-      <CursorHeatmap />
-      <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <MarqueeSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <WorkSection />
-      <EducationSection />
-      <ContactSection />
-      <FooterSection />
+    <main className="min-h-screen bg-[#f4f4f4]">
+      <Splash />
+      <Nav />
+      <Hero />
+      <About />
+      <Featured />
+      <Services />
+      <KindWords />
+      <Footer />
     </main>
   )
 }
