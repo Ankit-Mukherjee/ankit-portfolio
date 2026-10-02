@@ -2,6 +2,9 @@
 
 import { Plus } from "lucide-react"
 import { featured, moreProjects } from "./site-data"
+import { Doodle, Sticker } from "./doodles"
+import { Words } from "./words"
+import { Btn } from "./fx"
 
 export function Featured() {
   return (
@@ -10,8 +13,11 @@ export function Featured() {
         <p className="font-serif-display mx-auto max-w-xs text-xl leading-tight">
           Not to be missed, worth sharing. Here&apos;s a pick of what I build.
         </p>
-        <h2 className="display mt-3 text-6xl sm:text-8xl">
-          Recent <span className="font-serif-display normal-case tracking-[-0.03em]">work</span>
+        <h2 className="relative mt-3 inline-block display text-6xl sm:text-8xl">
+          <Words text="Recent" /> <Words text="work" className="font-serif-display normal-case tracking-[-0.03em]" delay={0.15} />
+          <Doodle kind="star" className="absolute -right-12 -top-4 h-10 w-10 text-[#f086d0]" delay={0.6} />
+          <Doodle kind="burst" className="absolute -left-12 top-2 h-10 w-10 text-[#1230f0]" delay={0.8} />
+          <Sticker className="absolute -bottom-3 -right-24 hidden sm:inline-block" rotate={8} color="#8fd3b6">Scroll ↓</Sticker>
         </h2>
       </div>
 
@@ -23,7 +29,8 @@ export function Featured() {
             target="_blank"
             rel="noopener noreferrer"
             style={{ top: 72 + i * 12, backgroundColor: p.frame }}
-            className="group sticky mb-10 block rounded-sm p-3 sm:p-4"
+            data-cursor="View"
+            className="group sticky mb-10 block rounded-sm p-3 transition-transform duration-500 hover:-rotate-[0.6deg] sm:p-4"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-black sm:aspect-[16/9]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -52,7 +59,7 @@ export function Featured() {
                 rel="noopener noreferrer"
                 className="group flex items-center justify-between gap-4 py-5 transition-colors hover:text-[#f086d0]"
               >
-                <span className="display text-3xl sm:text-5xl">{p.title}</span>
+                <span className="display text-3xl transition-transform duration-300 group-hover:translate-x-3 sm:text-5xl">{p.title}</span>
                 <span className="hidden text-sm text-white/60 sm:block">{p.tag}</span>
                 <Plus className="shrink-0 transition-transform group-hover:rotate-90" />
               </a>
@@ -60,14 +67,9 @@ export function Featured() {
           ))}
         </ul>
         <div className="mt-10 text-center">
-          <a
-            href="https://github.com/Ankit-Mukherjee"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#f086d0] px-4 py-2.5 text-[11px] font-semibold uppercase text-black"
-          >
-            <Plus size={14} /> See all on GitHub
-          </a>
+          <Btn href="https://github.com/Ankit-Mukherjee" external icon={<Plus size={14} />}>
+            See all on GitHub
+          </Btn>
         </div>
       </div>
     </section>

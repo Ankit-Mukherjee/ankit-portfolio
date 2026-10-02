@@ -4,6 +4,9 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { links } from "./site-data"
+import { Doodle, Sticker } from "./doodles"
+import { Words } from "./words"
+import { Btn } from "./fx"
 
 export function About() {
   return (
@@ -12,6 +15,7 @@ export function About() {
         <motion.div
           initial={{ rotate: -6, opacity: 0, y: 40 }}
           whileInView={{ rotate: -4, opacity: 1, y: 0 }}
+          whileHover={{ rotate: 0, scale: 1.03 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="absolute left-0 top-0 w-[68%] bg-white p-3 pb-10 shadow-xl"
@@ -21,12 +25,15 @@ export function About() {
         <motion.div
           initial={{ rotate: 8, opacity: 0, y: 60 }}
           whileInView={{ rotate: 5, opacity: 1, y: 0 }}
+          whileHover={{ rotate: 0, scale: 1.04 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.15 }}
           className="absolute bottom-0 right-0 w-[48%] bg-white p-3 pb-8 shadow-xl"
         >
           <Image src="/images/1.jpg" alt="Ankit" width={500} height={500} className="aspect-square w-full object-cover" />
         </motion.div>
+        <Sticker className="absolute -bottom-4 left-[6%] z-10" rotate={-7} color="#f4d97a">Pure Storage AI</Sticker>
+        <Doodle kind="star" className="absolute -left-4 top-[40%] h-10 w-10 text-[#1230f0]" />
         <Image
           src="/images/watermelon-cat.png"
           alt=""
@@ -39,9 +46,14 @@ export function About() {
       <div className="text-center">
         <p className="font-serif-display text-2xl">Who I am</p>
         <h2 className="display mt-2 text-5xl sm:text-7xl">
-          The engineer behind
+          <Words text="The engineer" />
           <br />
-          <span className="font-serif-display normal-case tracking-[-0.03em]">Ankit Mukherjee</span>
+          <Words text="behind" />
+          <br />
+          <span className="relative inline-block">
+            <Words text="Ankit Mukherjee" className="font-serif-display normal-case tracking-[-0.03em]" delay={0.2} />
+            <Doodle kind="squiggle" delay={0.8} className="absolute -bottom-3 left-0 h-3 w-full text-[#f086d0]" />
+          </span>
         </h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed">
           I bridge robust enterprise architecture and high-velocity innovation, with a focus on distributed systems, AWS
@@ -49,13 +61,11 @@ export function About() {
           agentic systems — LLM services, guardrails and evaluation, observable and secure on AWS. Before that:
           feature lead at AskTuring.ai, three years at PwC, and an MS in AI &amp; ML from the University at Buffalo.
         </p>
-        <a
-          href={links.resume}
-          className="mt-6 inline-flex items-center text-[11px] font-semibold uppercase"
-        >
-          <span className="flex h-8 w-8 items-center justify-center bg-[#1230f0] text-white"><ArrowRight size={14} /></span>
-          <span className="bg-[#1230f0]/10 px-3 py-2.5 text-[#1230f0] ring-1 ring-[#1230f0]">Download résumé</span>
-        </a>
+        <div className="mt-6">
+          <Btn href={links.resume} bg="#1230f0" fill="#101010" text="#ffffff" icon={<ArrowRight size={14} />}>
+            Download résumé
+          </Btn>
+        </div>
       </div>
     </section>
   )
